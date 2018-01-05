@@ -1,0 +1,6 @@
+[submodule "public"]
+	path = public
+	url = https://github.com/lucasmoura/lucasmoura.github.io
+[submodule "themes/kiera"]
+	path = themes/kiera
+	url = https://github.com/avianto/hugo-kiera.git

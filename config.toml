@@ -1,0 +1,17 @@
+baseURL = "http://example.org/"
+languageCode = "en-us"
+title = "lucasmoura's blog"
+theme = "kiera"
+
+pygmentsCodeFences = true
+
+disqusShortname = "" #Disqus shortname
+googleAnalytics = "" #Google Analytics ID
+
+[author]
+    name = "Lucas Moura"       #Author name
+    github = "lucasmoura"     #Github username
+    linkedin = "lucas-albuquerque-medeiros-de-moura-941644152"   #LinkedIn username
+
+[params]
+    tagline = "Another variable in the Deep Learning hyperspace"
