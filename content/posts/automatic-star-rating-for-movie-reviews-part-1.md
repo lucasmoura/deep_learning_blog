@@ -25,7 +25,7 @@ The tweet can be translated to:
 like)"
 
 1)I did not *give stars*. I wrote 1600 words.
-2) I hate RATINGS.
+2) I HATE ratings.
 ```
 
 It is easy to understand why some critics may find this task difficult. Not only
