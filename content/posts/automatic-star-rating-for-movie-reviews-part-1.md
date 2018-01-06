@@ -6,7 +6,7 @@ date: 2018-01-05T22:55:14-02:00
 One of my favorite hobbies in the world is watching movies. Usually, if I stay
 one week without watching a new movie I feel that something is wrong, After
 watching a movie, I almost read reviews from different critics on the Internet,
-to look into different opnioms about the movie I just saw or just to learn
+to look into different opinions about the movie I just saw or just to learn
 something new about movie in general. Most of the critics that I read rate their
 movies using the "star" rating, where a movie get a rate ranging from one to
 five stars.
@@ -79,9 +79,9 @@ the model we will choose:
 ![image alt text](/automatic-star-rating-for-movie-reviews-part-1/cineclick_sentences_size.png)
 
 We can see that the average number of words in each review is kind of big,
-specillay for the reviews from *Cinema Em Cena*.
+specially for the reviews from *Cinema Em Cena*.
 
-We now have a small and unbalaced dataset and with reviews with a relatively
+We now have a small and unbalanced dataset and with reviews with a relatively
 high number of words. Therefore, I don't believe that a simple model and a
 simple training approach will be enough to solve this problem.
 
