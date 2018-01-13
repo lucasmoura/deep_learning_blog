@@ -5,7 +5,7 @@ theme = "kiera"
 
 pygmentsCodeFences = true
 
-disqusShortname = "" #Disqus shortname
+disqusShortname = "https-lucasmoura-github-io"
 googleAnalytics = "" #Google Analytics ID
 
 [author]
