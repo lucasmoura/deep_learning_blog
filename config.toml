@@ -15,3 +15,6 @@ googleAnalytics = "" #Google Analytics ID
 
 [params]
     tagline = "Another variable in the Deep Learning hyperspace"
+
+[permalinks]
+  posts = "blog/:year/:month/:day/:title/"
