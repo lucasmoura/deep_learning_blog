@@ -1,7 +1,6 @@
 ---
 title: "Automatic Star Rating for Movie Reviews Part 2"
 date: 2018-01-31T20:46:57-02:00
-draft: true
 ---
 
 In the previous part of this series, I presented the Dataset of movie reviews I
