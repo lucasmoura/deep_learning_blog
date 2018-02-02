@@ -12,20 +12,150 @@ be seen on the following picture.
 
 ![image alt text](/automatic-star-rating-for-movie-reviews-part-2/bag_of_words.png)
 
-In the above image, we can see that the model will receive a list of ids as
-input. Every id in the array represents a word that can be found on one of the
-movie reviews. This means that a film review is converted into a list of word
-ids before being fed to the model. 
+In the above image, we can see that the model receives an array of word-ids.
+An id represents a unique word that can be found on a movie review.
+This means that a film review is converted into a list of word-ids before being fed to the model
 
-The second step of this network turning each into an array, by using the
-[Word Embedding](https://en.wikipedia.org/wiki/Word_embedding) matrix. This
-matrix has V rows and D columns, where V is the size of vocabulary and D is the
-dimension size of the embedding. Therefore, each row in the matrix represents a
-different word in the vocabaulary. This also means that each id in word list
-represents a distinct row in the embedding matrix.
+The first step of this network is turning each word-id into an embedding array using an
+[Word Embedding](https://en.wikipedia.org/wiki/Word_embedding) matrix. This matrix has V rows and D
+columns, where V is the size of vocabulary (number of unique words that can be found on the
+reviews) and D is the dimension size of the embedding. Therefore, each row in the matrix represents
+a different word in the vocabulary, meaning that each word-id in the input represents a distinct
+row in the Embedding matrix.
 
 After turning each id into an array of size D, we sum all of these arrays and
 average them, turning the whole movie review into an array of size 1 X D. This
-array is then fed into a neural network model, which outputs the probability of
-the movie beloging to any of the possible 5 star ratings.
+array is then fed into a neural network model, which output the probability of
+the movie belonging to any of the possible 5 star ratings.
 
+## Data Preprocessing
+
+Every review is turned into a list of word-ids before being fed to the
+model. Before making that conversion, I have applied two distinct preprocessing
+techniques. The first one is tokenisation, which means that I have turned the
+film review into a list of tokens, where a token is a word. For example, the
+word "good!!!" would be turned into the following list of tokens ["good",
+"!", "!", "!]. After that, I remove common Portuguese
+[stop words](https://gist.github.com/alopes/5358189), since I am using the 
+Bag Of Words technique.
+
+Finally, each token is converted into a word-id. This is achieved by loading a pre-trained
+Embedding matrix and verifying if that token can be found in the matrix. If that is the case, I
+assign the row of the Embedding matrix that represents this word as its word-id.
+
+## Word Embeddings
+
+I have chosen the pre-trained Embeddings from [fastText](https://fasttext.cc/)
+to use in my model. The reason behind that is that fastText provide Portuguese Embeddings and uses
+subword information to train the Embeddings. This means that the model is trained based on the
+words itself and the ngrams that compose them. Since they are also training ngrams Embeddings, we
+can use this Embeddings to create Embedding arrays for words the model has never seen. To achieve
+that, we break the word into its ngrams and combine the embeddings of the individuals ngrams into
+the word Embedding array.
+
+Therefore, when we turn the training data into a list of tokens, we guarantee
+that all tokens in the training data have a valid word-id. However, since we just use the training
+set to create the word-ids, there may be words that appear in the
+validation/test set that do not have a valid word-id. In that case, we turn this
+word into a unknown word-id, that maps to an Embedding array containing only zeros.
+
+## Dataset splits
+
+Every review source (Omelete, Cineclick and Cinema Em Cena) has been divided into a 5 categories.
+Each category represents a movie rating and stores all movies with that rating.
+
+After that, I have removed 20% of the data from each of these categories. 50% of this data is used
+as validation data and the other half for test data. This ensures that both validation and test
+sets possess a full range of ratings. The 80% remaining data is used as training data. 
+
+Once that separation is completed, I create 5 distinct datasets:
+
+* **Full**: A dataset that combines the training dataset of all data sources, as
+  well as combining the dataset for both the validation and test dataset.
+* **Full (undersampling)**: Similar to **Full**, but I have applied the
+  [undersampling](https://en.wikipedia.org/wiki/Oversampling_and_undersampling_in_data_analysis)
+  technique to guarantee that all ratings in the training dataset have the same
+  amount of data. This is not true to the validation and test dataset.
+* **Omelete**: A dataset all train, validation and test comes uniquely from
+  Omelete reviews.
+* **Cineclick**: A dataset all train, validation and test comes uniquely from
+  Cineclick reviews.
+* **Cec**: A dataset all train, validation and test comes uniquely from
+  Cinema Em Cena reviews.
+
+I have not used the undersampling technique for **Omelete**, **Cineclick** and
+**Cec** because the training dataset generated would be too small for training the
+model.
+
+## Model definitions
+
+I have trained two distinct Bag Of Words models to handle this task. The first
+model, is a Neural Network with no hidden layers, which I call **bownh**.
+The second model has a hidden layer with 150 units, which I call
+**bowsh**.
+
+Both models were trained for 15 epochs. Hyper-parameters configuration was done
+using the validation dataset, leading to the following choices:
+
+* **Optimization**: [Adam](https://arxiv.org/abs/1412.6980) algorithm with an initial learning rate
+of 0.001. Stochastic Gradient Descent (SGD) was also used, with a batch size of 32.
+* **Regularization**: L2 regularization with weight
+decay of 0.001 and dropout on each layer, with keep probability of 0.5.
+
+Finally, I have used [TensorFlow Estimator
+API](https://www.tensorflow.org/programmers_guide/estimators) to implement both
+of these models.
+
+## Model results
+
+The model with greatest accuracy was the **bownh** 
+using the  **Full** dataset. This model achieves 46.72%
+accuracy for the test set. However, since we are dealing with an unbalanced
+dataset, the accuracy metric can be misleading. We can look at the confusion
+matrix produced by the model to better understand this metric:
+
+![image alt text](/automatic-star-rating-for-movie-reviews-part-2/best_confusion_matrix.png)
+
+We can see that the model is doing really good on performing predictions for
+both 3 and 4 ratings. However as our data analysis in the past post has
+demonstrated, we have more review being rated with 3 and 4 stars then others.
+However, we can see that the mistakes the model is doing are not that absurd.
+For example, most of the wrong predictions for 5 star rating movies is on
+classifying them as 4 stars, which is not absurd. This behavior of
+misclassifying review for the nearest rating can be seen over all classes.
+
+The next best model is the **bownh** using the **Full (undersampling)** dataset.
+This model achieves an accuracy of 38.75% and has produced the following
+confusion matrix:
+
+![image alt text](/automatic-star-rating-for-movie-reviews-part-2/undersampling_confusion_matrix.png)
+
+Although this model has a worst accuracy, it produces best accuracies for least
+represented ratings, such as 1 and 5 star reviews.
+In my opinion, this ability makes this model superior the
+model with best accuracy. This makes me believe that the undersampling strategy was partly
+successful on generating better predictions for the mode, but can still be
+improved.
+
+## Results for Single Source Datasets
+
+When using these models on single source datasets(**Omelete**, **Cineclick** and
+**Cec**), the results are not very positive. For both Bag Of Word models 
+we have confusion matrices with this pattern:
+
+![image alt text](/automatic-star-rating-for-movie-reviews-part-2/single_source_confusion_matrix.png)
+
+*Confusion matrix generated from bownh using the Omelete dataset*
+
+We can see that the model is not making many different predictions,
+concentrating the predictions for 3 and 4 rating while ignoring the rest of the
+possible ratings.
+
+## Next steps
+
+I have seen that the small and unbalanced dataset will be a real problem and
+that the Bag Of Words model is not enough to handle the data. However, I have
+established a baseline that can be used for comparison reasons, when I develop
+new models. Therefore, in my next post I will focus on better techniques to handle this dataset
+while also exploring new and more complex model architectures, for example, 
+Recurrent Neural Networks. Keep tuned for more :)
