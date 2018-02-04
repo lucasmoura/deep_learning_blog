@@ -3,7 +3,8 @@ title: "Automatic Star Rating for Movie Reviews Part 2"
 date: 2018-01-31T20:46:57-02:00
 ---
 
-In the previous part of this series, I presented the Dataset of movie reviews I
+In the [previous part](https://lucasmoura.github.io/blog/2018/01/31/automatic-star-rating-for-movie-reviews-part-2/)
+of this series, I presented the Dataset of movie reviews I
 have gatheres and analyzed it a little. Now it is time to train a model using
 it. The first model I tried is a
 [Bag Of Words](https://en.wikipedia.org/wiki/Bag-of-words_model) model, as can
@@ -116,12 +117,21 @@ matrix produced by the model to better understand this metric:
 ![image alt text](/automatic-star-rating-for-movie-reviews-part-2/best_confusion_matrix.png)
 
 We can see that the model is doing really good on performing predictions for
-both 3 and 4 ratings. However as our data analysis in the past post has
-demonstrated, we have more review being rated with 3 and 4 stars then others.
-However, we can see that the mistakes the model is doing are not that absurd.
-For example, most of the wrong predictions for 5 star rating movies is on
-classifying them as 4 stars, which is not absurd. This behavior of
-misclassifying review for the nearest rating can be seen over all classes.
+both 3 and 4 ratings. However, let's look how the test set is divided:
+
+| Label    | Number of reviews |
+| :------: |:----------------: |
+|   1      |        55         |
+|   2      |       152         |
+|   3      |       241         |
+|   4      |       194         |
+|   5      |        60         |
+
+We can see that the number of 3 and 4 star reviews are way bigger in comparison
+with other reviews. Therefore, the reason this model achieves the best accuracy
+is simply because it is labelling more reviews as being 3 or 4 stars. It
+practically doesn't generate predictions for 1 and 5 star reviews, which is
+really bad.
 
 The next best model is the **bownh** using the **Full (undersampling)** dataset.
 This model achieves an accuracy of 38.75% and has produced the following
@@ -130,11 +140,14 @@ confusion matrix:
 ![image alt text](/automatic-star-rating-for-movie-reviews-part-2/undersampling_confusion_matrix.png)
 
 Although this model has a worst accuracy, it produces best accuracies for least
-represented ratings, such as 1 and 5 star reviews.
-In my opinion, this ability makes this model superior the
+represented ratings, such as 1 and 5 star reviews. Which is an improvement over
+the model with best accuracy. In my opinion, this ability makes this model superior the
 model with best accuracy. This makes me believe that the undersampling strategy was partly
 successful on generating better predictions for the mode, but can still be
-improved.
+improved. For example, when undersampling is performed, we don't leave out a lot
+of 3 and 4 star reviews. I believe it will be possible to use this extra data,
+but still use the undersampling strategy, but this will require further
+experimentation.
 
 ## Results for Single Source Datasets
 
@@ -158,3 +171,8 @@ established a baseline that can be used for comparison reasons, when I develop
 new models. Therefore, in my next post I will focus on better techniques to handle this dataset
 while also exploring new and more complex model architectures, for example, 
 Recurrent Neural Networks. Keep tuned for more :)
+
+*(If you want to better understand how am I implemented the model and how I
+generated the results presented in this article, please take a look
+at the [Github](https://github.com/lucasmoura/movie_critic_stars) page for this
+project. PRs are always welcome too)*
