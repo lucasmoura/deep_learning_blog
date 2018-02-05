@@ -5,21 +5,21 @@ date: 2018-01-31T20:46:57-02:00
 
 In the [previous part](https://lucasmoura.github.io/blog/2018/01/31/automatic-star-rating-for-movie-reviews-part-2/)
 of this series, I presented the Dataset of movie reviews I
-have gatheres and analyzed it a little. Now it is time to train a model using
+gathered and analyzed it a little. Now it is time to train a model using
 it. The first model I tried is a
 [Bag Of Words](https://en.wikipedia.org/wiki/Bag-of-words_model) model, as can
-be seen on the following picture.
+be seen in the following picture.
 
 ![image alt text](/automatic-star-rating-for-movie-reviews-part-2/bag_of_words.png)
 
 In the above image, we can see that the model receives an array of word-ids.
-An id represents a unique word that can be found on a movie review.
+An id represents a unique word that can be found in a movie review.
 This means that a film review is converted into a list of word-ids before being fed to the model
 
-The first step of this network is turning each word-id into an embedding array using an
+The first step of this network is turning each word-id into an embedding array using a
 [Word Embedding](https://en.wikipedia.org/wiki/Word_embedding) matrix. This matrix has V rows and D
-columns, where V is the size of vocabulary (number of unique words that can be found on the
-reviews) and D is the dimension size of the embedding. Therefore, each row in the matrix represents
+columns, where V is the size of vocabulary (number of unique words that can be found in the
+reviews). D is the dimension size of the embedding. Therefore, each row in the matrix represents
 a different word in the vocabulary, meaning that each word-id in the input represents a distinct
 row in the Embedding matrix.
 
@@ -32,14 +32,14 @@ the movie belonging to any of the possible 5 star ratings.
 
 Every review is turned into a list of word-ids before being fed to the
 model. Before making that conversion, I have applied two distinct preprocessing
-techniques. The first one is tokenisation, which means that I have turned the
+techniques. The first one is tokenization, which means that I have turned the
 film review into a list of tokens, where a token is a word. For example, the
 word "good!!!" would be turned into the following list of tokens ["good",
 "!", "!", "!]. After that, I remove common Portuguese
 [stop words](https://gist.github.com/alopes/5358189), since I am using the 
 Bag Of Words technique.
 
-Finally, each token is converted into a word-id. This is achieved by loading a pre-trained
+Finally, each token is converted into a word-id. This conversion is achieved by loading a pre-trained
 Embedding matrix and verifying if that token can be found in the matrix. If that is the case, I
 assign the row of the Embedding matrix that represents this word as its word-id.
 
@@ -49,7 +49,7 @@ I have chosen the pre-trained Embeddings from [fastText](https://fasttext.cc/)
 to use in my model. The reason behind that is that fastText provide Portuguese Embeddings and uses
 subword information to train the Embeddings. This means that the model is trained based on the
 words itself and the ngrams that compose them. Since they are also training ngrams Embeddings, we
-can use this Embeddings to create Embedding arrays for words the model has never seen. To achieve
+can use the ngrams Embeddings to create Embedding arrays for words the model has never seen. To achieve
 that, we break the word into its ngrams and combine the embeddings of the individuals ngrams into
 the word Embedding array.
 
@@ -57,11 +57,11 @@ Therefore, when we turn the training data into a list of tokens, we guarantee
 that all tokens in the training data have a valid word-id. However, since we just use the training
 set to create the word-ids, there may be words that appear in the
 validation/test set that do not have a valid word-id. In that case, we turn this
-word into a unknown word-id, that maps to an Embedding array containing only zeros.
+word into an unknown word-id, that maps to an Embedding array containing only zeros.
 
 ## Dataset splits
 
-Every review source (Omelete, Cineclick and Cinema Em Cena) has been divided into a 5 categories.
+Every review source (Omelete, Cineclick and Cinema Em Cena) is divided into a 5 categories.
 Each category represents a movie rating and stores all movies with that rating.
 
 After that, I have removed 20% of the data from each of these categories. 50% of this data is used
@@ -70,18 +70,14 @@ sets possess a full range of ratings. The 80% remaining data is used as training
 
 Once that separation is completed, I create 5 distinct datasets:
 
-* **Full**: A dataset that combines the training dataset of all data sources, as
-  well as combining the dataset for both the validation and test dataset.
-* **Full (undersampling)**: Similar to **Full**, but I have applied the
-  [undersampling](https://en.wikipedia.org/wiki/Oversampling_and_undersampling_in_data_analysis)
-  technique to guarantee that all ratings in the training dataset have the same
-  amount of data. This is not true to the validation and test dataset.
-* **Omelete**: A dataset all train, validation and test comes uniquely from
-  Omelete reviews.
-* **Cineclick**: A dataset all train, validation and test comes uniquely from
-  Cineclick reviews.
-* **Cec**: A dataset all train, validation and test comes uniquely from
-  Cinema Em Cena reviews.
+| Dataset                  | Description |
+| :---------------------: |:---------------- |
+|**Full**                 |A dataset that combines the training dataset of all data sources, as well as combining the dataset for both the validation and test dataset.|
+|**Full (undersampling)** |Similar to **Full**, but I have applied the [undersampling](https://en.wikipedia.org/wiki/Oversampling_and_undersampling_in_data_analysis) technique to guarantee that all ratings in the training dataset have the same amount of data. This is not true to the validation and test dataset.|
+|**Omelete**              |A dataset where all train, validation and test files comes uniquely from Omelete reviews.|
+|**Cineclick**            |A dataset where all train, validation and test files comes uniquely from Cineclick reviews.|
+|**Cec**                  |A dataset where all train, validation and test files comes uniquely from Cinema Em Cena reviews.|
+
 
 I have not used the undersampling technique for **Omelete**, **Cineclick** and
 **Cec** because the training dataset generated would be too small for training the
@@ -109,7 +105,7 @@ of these models.
 ## Model results
 
 The model with greatest accuracy was the **bownh** 
-using the  **Full** dataset. This model achieves 46.72%
+using the  **Full** dataset. This model achieves 47%
 accuracy for the test set. However, since we are dealing with an unbalanced
 dataset, the accuracy metric can be misleading. We can look at the confusion
 matrix produced by the model to better understand this metric:
@@ -134,7 +130,7 @@ practically doesn't generate predictions for 1 and 5 star reviews, which is
 really bad.
 
 The next best model is the **bownh** using the **Full (undersampling)** dataset.
-This model achieves an accuracy of 38.75% and has produced the following
+This model achieves an accuracy of 39% and has produced the following
 confusion matrix:
 
 ![image alt text](/automatic-star-rating-for-movie-reviews-part-2/undersampling_confusion_matrix.png)
@@ -142,7 +138,7 @@ confusion matrix:
 Although this model has a worst accuracy, it produces best accuracies for least
 represented ratings, such as 1 and 5 star reviews. Which is an improvement over
 the model with best accuracy. In my opinion, this ability makes this model superior the
-model with best accuracy. This makes me believe that the undersampling strategy was partly
+model with best accuracy. This fact makes me believe that the undersampling strategy was partly
 successful on generating better predictions for the mode, but can still be
 improved. For example, when undersampling is performed, we don't leave out a lot
 of 3 and 4 star reviews. I believe it will be possible to use this extra data,
