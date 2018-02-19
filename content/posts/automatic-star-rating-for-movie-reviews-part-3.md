@@ -1,7 +1,6 @@
 ---
 title: "Automatic Star Rating for Movie Reviews Part 3"
 date: 2018-02-19T14:32:41-03:00
-draft: true
 ---
 
 In the [previous part](https://lucasmoura.github.io/blog/2018/01/31/automatic-star-rating-for-movie-reviews-part-2/)
