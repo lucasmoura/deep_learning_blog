@@ -152,6 +152,11 @@ I have learned a lot not only about Natural Language Processing; but also about 
 for text classification. I have confidence that I will
 have better judgement on my next NLP task and also be faster to implement new solutions.
 
+*(If you want to better understand how I implemented the models and how I
+generated the results presented in this article, please take a look
+at the [Github](https://github.com/lucasmoura/movie_critic_stars) page for this
+project.)*
+
 ## Bibliography
 
 * [1](https://www.cs.toronto.edu/~hinton/absps/JMLRdropout.pdf) Dropout: A Simple Way to Prevent Neural Networks from Overfitting
