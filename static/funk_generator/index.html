@@ -35,25 +35,25 @@
         <section id="home">
           <div class="ui form">
             <div class="inline fields">
-              <div class="field radio_bom" style="margin: 10px;" data-content="O modelo gerado usará toda a base de músicas." id="1">
+              <div class="field radio_bom" style="margin: 10px;" data-variation="huge" data-content="O modelo gerado usará toda a base de músicas." id="1">
                 <div class="ui radio checkbox">
                   <input name="frequency" class="radioModel" checked="checked" type="radio">
                   <label id="1">Modelo Híbrido</label>
                 </div>
               </div>
-              <div class="field radio_bom"  style="margin: 10px;" id="2" data-content="O modelo gerado usará somente músicas do Kondzilla!">
+              <div class="field radio_bom"  style="margin: 10px;" id="2" data-variation="huge" data-content="O modelo gerado usará somente músicas do Kondzilla!">
                 <div class="ui radio checkbox">
                   <input name="frequency" class="radioModel" type="radio">
                   <label id="2">Funk Kondzilla</label>
                 </div>
               </div>
-              <div class="field radio_bom" id="3"  style="margin: 10px;" data-content="O modelo gerado usará somente funk proibidão zika">
+              <div class="field radio_bom" id="3"  style="margin: 10px;" data-variation="huge" data-content="O modelo gerado usará somente funk proibidão zika">
                 <div class="ui radio checkbox">
                   <input name="frequency"  class="radioModel" type="radio">
                   <label id="3">Funk Proibidão</label>
                 </div>
               </div>
-              <div class="field radio_bom" id="4" style="margin: 10px;" data-content="O modelo gerado usará somente funk ostentação">
+              <div class="field radio_bom" id="4" style="margin: 10px;" data-variation="huge" data-content="O modelo gerado usará somente funk ostentação">
                 <div class="ui radio checkbox">
                   <input name="frequency"  class="radioModel" type="radio">
                   <label id="4">Funk Ostentação</label>
@@ -63,7 +63,7 @@
           </div>
 
           <div class="ui fluid action input">
-            <input placeholder="Inicio do funk" id="initial_feed" type="text">
+            <input class="ui" placeholder="Inicio do funk" data-html="Esse é um campo opcional. Aqui você<br>pode começar sua música de funk e<br>deixar o MC Neural completar ela para<br>você. Só garanta que as palavras estão<br>separadas por um espaço e que como<br>essa música vai ser gerada em tempo<br>real, o MC Neural vai precisar de um<br>pouco mais de tempo para criar a música." data-variation="huge wide" id="initial_feed" type="text"/>
             <button class="ui button" id="request_funk">Solta essa PUORRA!!</button>
           </div>
 
@@ -114,6 +114,7 @@
         $('.ui.checkbox').checkbox()
         $('.ui.radio.checkbox').checkbox();
         $('.field.radio_bom').popup()
+        $('#initial_feed').popup()
       }
 
       function api_call() {
