@@ -2,147 +2,148 @@
 
 <html lang="en-us">
 
-<head>
-  <title>lucasmoura&#39;s blog</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="The HTML5 Herald" />
-  <meta name="author" content="Lucas Moura" />
-  <meta name="generator" content="Hugo 0.40.3" />
+  <head>
+    <title>lucasmoura&#39;s blog</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="The HTML5 Herald" />
+    <meta name="author" content="Lucas Moura" />
+    <meta name="generator" content="Hugo 0.40.3" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
-</head>
+  </head>
 
-<body>
-  <div id="container">
-		<header>
-			<h1>
-				<a href="/">lucasmoura&rsquo;s blog</a>
-			</h1>
-			<ul id="social-media">
-				<li><a href="https://www.linkedin.com/in/lucas-albuquerque-medeiros-de-moura-941644152"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-				<li><a href="https://github.com/lucasmoura"><i class="fa fa-github fa-lg" aria-hidden="true"></i></a></li>
-			</ul>
-			<p><em>Another variable in the Deep Learning hyperspace</em></p>
-		</header>
+  <body>
+    <div id="container" style="margin-top: 20px;">
+      <header>
+        <h1>
+          <a href="/">lucasmoura&rsquo;s blog</a>
+        </h1>
+        <ul id="social-media">
+          <li><a href="https://www.linkedin.com/in/lucas-albuquerque-medeiros-de-moura-941644152"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+          <li><a href="https://github.com/lucasmoura"><i class="fa fa-github fa-lg" aria-hidden="true"></i></a></li>
+        </ul>
+        <p><em>Another variable in the Deep Learning hyperspace</em></p>
+      </header>
 
-    <main>
+      <main>
+        <section id="home">
+          <div class="ui form">
+            <div class="inline fields">
+              <div class="field radio_bom" style="margin: 10px;" data-content="O modelo gerado usará toda a base de músicas." id="1">
+                <div class="ui radio checkbox">
+                  <input name="frequency" class="radioModel" checked="checked" type="radio">
+                  <label id="1">Modelo Híbrido</label>
+                </div>
+              </div>
+              <div class="field radio_bom"  style="margin: 10px;" id="2" data-content="O modelo gerado usará somente músicas do Kondzilla!">
+                <div class="ui radio checkbox">
+                  <input name="frequency" class="radioModel" type="radio">
+                  <label id="2">Funk Kondzilla</label>
+                </div>
+              </div>
+              <div class="field radio_bom" id="3"  style="margin: 10px;" data-content="O modelo gerado usará somente funk proibidão zika">
+                <div class="ui radio checkbox">
+                  <input name="frequency"  class="radioModel" type="radio">
+                  <label id="3">Funk Proibidão</label>
+                </div>
+              </div>
+              <div class="field radio_bom" id="4" style="margin: 10px;" data-content="O modelo gerado usará somente funk ostentação">
+                <div class="ui radio checkbox">
+                  <input name="frequency"  class="radioModel" type="radio">
+                  <label id="4">Funk Ostentação</label>
+                </div>
+              </div>
+            </div>
+          </div>
 
-<section id="home">
+          <div class="ui fluid action input">
+            <input placeholder="Inicio do funk" id="initial_feed" type="text">
+            <button class="ui button" id="request_funk">Solta essa PUORRA!!</button>
+          </div>
 
-	<div class="ui form">
-		<div class="inline fields">
-			<div class="field radio_bom" id="1">
-				<div class="ui radio checkbox">
-					<input name="frequency" class="radioModel" checked="checked" type="radio">
-					<label id="1">Modelo Híbrido</label>
-				</div>
-			</div>
-			<div class="field radio_bom" id="2">
-				<div class="ui radio checkbox">
-					<input name="frequency" class="radioModel" type="radio">
-					<label id="2">Funk Kondzilla</label>
-				</div>
-			</div>
-			<div class="field radio_bom" id="3">
-				<div class="ui radio checkbox">
-					<input name="frequency"  class="radioModel" type="radio">
-					<label id="3">Funk Proibidão</label>
-				</div>
-			</divid="4">
-			<div class="field radio_bom" id="4">
-				<div class="ui radio checkbox">
-					<input name="frequency"  class="radioModel" type="radio">
-					<label id="4">Funk Ostentação</label>
-				</div>
-			</div>
-		</div>
-	</div>
+          <div id="funk_zika" class="ui segment">
+            <p>
+              É o dj que tá tocando e não sabe de nada <br>
+              Eu já tô no clima e já tô no meu nome <br>
+              Cordão de ouro no pescoço eu tô na moda <br>
+              Com a camisa da Louis Vuitton <br>
+              Pulo da morena que elas gosta <br>
+              E se eu te pego no baile <br>
+              De captiva de citroen ou de hayabusa <br>
+              Tu viu a 1100 cilindradas <br>
+              Se eu tô no litoral de cordão de ouro <br>
+              De cordão de ouro no pescoço <br>
+              De juju de armani ou de Corolla <br>
+              Olha o kit tô vindo de Megane <br>
+              A loira tá no peito <br>
+              De lacoste e Santa Fé <br>
+              É o bonde do motor <br>
+              De ferrari que elas quer <br>
+              Então fala que tá bom <br>
+              Se é da vida bandida <br>
+              Quer viver na vida bandida <br>
+              Quer caô quer um milhão de mulher <br>
+              Se tu quer saber de mim <br>
+              Na cama tu quer o que eu quero é o meu dinheiro <br>
+              E o meu <br>
+              Iate é o teu malote`
+            </p>
+          </div>
+        </section>
+      </main>
 
-	<div class="ui action input">
-		<input placeholder="Inicio do funk" id="initial_feed" type="text">
-		<button class="ui button" id="request_funk">Solta essa PUORRA!!</button>
-	</div>
+      <footer>
+        <h6>
+          Rendered by <a href="https://gohugo.io" title="Hugo">Hugo</a> |
+          <a href="https://lucasmoura.github.io/index.xml">Subscribe</a>
+        </h6>
+      </footer>
+    </div>
+    <script src="/js/scripts.js"></script>
 
-	<div id="funk_zika" class="ui segment">
-<p>
-		É o dj que tá tocando e não sabe de nada <br>
-		Eu já tô no clima e já tô no meu nome <br>
-		Cordão de ouro no pescoço eu tô na moda <br>
-		Com a camisa da Louis Vuitton <br>
-		Pulo da morena que elas gosta <br>
-		E se eu te pego no baile <br>
-		De captiva de citroen ou de hayabusa <br>
-		Tu viu a 1100 cilindradas <br>
-		Se eu tô no litoral de cordão de ouro <br>
-		De cordão de ouro no pescoço <br>
-		De juju de armani ou de Corolla <br>
-		Olha o kit tô vindo de Megane <br>
-		A loira tá no peito <br>
-		De lacoste e Santa Fé <br>
-		É o bonde do motor <br>
-		De ferrari que elas quer <br>
-		Então fala que tá bom <br>
-		Se é da vida bandida <br>
-		Quer viver na vida bandida <br>
-		Quer caô quer um milhão de mulher <br>
-		Se tu quer saber de mim <br>
-		Na cama tu quer o que eu quero é o meu dinheiro <br>
-		E o meu <br>
-		Iate é o teu malote`
-</p>
-	</div>
-</section>
+    <script>
+      selectedModel = 1;
 
+      function load_semanticui_components() {
+        $('.ui.checkbox').checkbox()
+        $('.ui.radio.checkbox').checkbox();
+        $('.field.radio_bom').popup()
+      }
 
+      function api_call() {
+        var feed = $('#initial_feed').val();
+        var option = $('.ui.radio.checkbox.checked').val();
+        var input_data = {'id': selectedModel, 'sentence': feed}
+        $.ajax({
+          url: "http://143.107.45.98:5000/api",
+          method: 'POST',
+          contentType: 'application/json',
+          data: JSON.stringify(input_data),
+          success: function( data, textStatus, jQxhr ){
+            $("#funk_zika p").html(data);
+          },
+          error: function( jqXhr, textStatus, errorThrown ){
+            $('#api_output').html( "There was an error" );
+            console.log( errorThrown );
+          },
+          timeout: 10000
+        });
+      }
 
-</main>
-    <footer>
-        <h6> | 
-            Rendered by <a href="https://gohugo.io" title="Hugo">Hugo</a> |
-            <a href="https://lucasmoura.github.io/index.xml">Subscribe</a></h6>
-    </footer>
-</div>
-<script src="/js/scripts.js"></script>
-<script>
-$(document).ready(function() {
-	$('.ui.checkbox').checkbox()
-	$('.ui.radio.checkbox').checkbox();
-	selectedModel = 1;
+      $(document).ready(function() {
+        load_semanticui_components();
 
-	function api_call(input) {
-		var feed = $('#initial_feed').val();
-		var option = $('.ui.radio.checkbox.checked').val();
-		var input_data = {'id': selectedModel, 'sentence': feed}
-		$.ajax({
-			url: "http://143.107.45.98:5000/api",
-			method: 'POST',
-			contentType: 'application/json',
-			data: JSON.stringify(input_data),
-			success: function( data, textStatus, jQxhr ){
-				console.log("data => ", data);
-				$("#funk_zika p").html(data);
-			},
-			error: function( jqXhr, textStatus, errorThrown ){
-				$('#api_output').html( "There was an error" );
-				console.log( errorThrown );
-			},
-			timeout: 10000
-		});
-	}
-
-	$("#request_funk").on('click', function() { api_call(1) });
-	$('.ui.radio.checkbox').checkbox();
-	$(".radio_bom").on('click', function(e) {
-		selectedModel = e.target.id;
-	});
-});
-</script>
-</body>
-
+        $("#request_funk").on('click', function() { api_call() });
+        $(".radio_bom").on('click', function(e) {
+          selectedModel = e.target.id;
+        });
+      });
+    </script>
+  </body>
 </html>
